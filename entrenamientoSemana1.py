@@ -1,11 +1,14 @@
-
-
 total = 0
 
 print("Desea registrar un producto? ")
 regProducto = int (input("1. Si ----------- 2. No\n"))
 
-
+def mirar_numero(numero):
+     while not numero.isnumeric():
+        print("SOLO SE PERMITE INGRESAR NUMEROS")
+        numero = input("Ingrese el numero: ")
+        return numero
+    
 while regProducto == 1 :
 
     nombreProducto = input("Ingrese el nombre del producto: ")
@@ -14,13 +17,23 @@ while regProducto == 1 :
         nombreProducto = input("Ingrese el nombre del producto: ")
 
 
-    precioUnitario = float(input("Ingrese el precio unitario del producto: "))
-    cantidad = int (input("Ingrese la cantidad que desea llevar: "))
+    precioUnitario = input("Ingrese el precio unitario del producto: ")
+    while not precioUnitario.isnumeric():
+        print("SOLO SE PERMITE INGRESAR NUMEROS")
+        precioUnitario = input("Ingrese el numero: ")
+    
 
-    if precioUnitario < 0 or cantidad < 0:
+    cantidad = input("Ingrese la cantidad que desea llevar: ")
+    while not cantidad.isnumeric():
+        print("SOLO SE PERMITE INGRESAR NUMEROS")
+        cantidad = input("Ingrese el numero: ")
+    
+
+
+    if int(precioUnitario) < 0 or int(cantidad) < 0:
         print("Ingrese un valor positivo")
     else:
-        total = precioUnitario * cantidad
+        total = int(precioUnitario) *int(cantidad)
         
         
 
