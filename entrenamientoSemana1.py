@@ -45,7 +45,7 @@ while regProducto == 1 :
         descuento = float (input("Ingrese el valor del descuento: "))
         descuento = descuento / 100
         totalDesc = total - (total * descuento) 
-        print("Nombre del producto: ", nombreProducto)
+        print("Nombre del producto: ", nombreProducto.capitalize())
         print("Cantidad a llevar: ", cantidad)
         print("Precio total: ", total)
         print ("El descuento es: ",(total * descuento))
@@ -53,7 +53,7 @@ while regProducto == 1 :
 
     else:
         print("El producto no tiene descuento")
-        print("Nombre del producto: ", nombreProducto)
+        print("Nombre del producto: ", nombreProducto.capitalize())
         print("Cantidad a llevar: ", cantidad)
         print("Precio total: \n", total)
 
