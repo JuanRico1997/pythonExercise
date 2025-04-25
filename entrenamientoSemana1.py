@@ -1,13 +1,10 @@
 total = 0
 
+
 print("Desea registrar un producto? ")
 regProducto = int (input("1. Si ----------- 2. No\n"))
 
-def mirar_numero(numero):
-     while not numero.isnumeric():
-        print("SOLO SE PERMITE INGRESAR NUMEROS")
-        numero = input("Ingrese el numero: ")
-        return numero
+
     
 while regProducto == 1 :
 
