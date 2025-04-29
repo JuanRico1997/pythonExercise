@@ -44,7 +44,7 @@ while iniciar:
 
     if int(option) == 1:
 
-        aprobarNota
+        aprobarNota()
 
     elif int(option) == 2:
 
