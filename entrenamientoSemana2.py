@@ -1,6 +1,7 @@
 def aprobarNota():
     while True:
-        note = input("Ingrese nota: ")
+        note = input("Ingrese nota --- Debe ser de 0 a 100\n")
+        
         if not note.isnumeric():
             print("No se permite caracteres.")
             continue
@@ -14,8 +15,10 @@ def aprobarNota():
         else:
             print("Gano la nota")
             break
+
 def promedioNotas(n):
     return sum(n)/len(n)
+
 iniciar = True
 
 
@@ -78,11 +81,20 @@ while iniciar:
 
     elif int(option) == 4:
         
+        cont3 = 0
         note = input("Ingrese las notas separadas por coma: ").split(",")
         notes = list(map(int,note))      
         promedio = sum(notes)/len(notes)
         print(f"Las notas son {notes} y el promedio es {promedio}")
+        rep = input("Ingrese un numero a verificar si se repite: ")
+        for i in range(0,len(notes)):
+            if int(rep) == notes[i]:
+                cont3+=1
+        print(f"El numero se repite {cont3} veces.")
 
+    else:
+        print("Ingrese una opción valida.")
+        
     print("\nDesea volver al menú?")
     menu = int(input("""
 1.Si
