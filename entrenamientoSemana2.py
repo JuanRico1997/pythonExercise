@@ -16,6 +16,7 @@ def aprobarNota():
             print("Gano la nota")
             break
 
+
 def promedioNotas(n):
     return sum(n)/len(n)
 
@@ -35,6 +36,13 @@ while iniciar:
     3.Contar calificaciones mayores
     4.Verificar y contar calificaciones específicas\n""")
 
+    while int(option)>5 or int(option)<1:
+        
+        option = input("""Ingrese una opcion:
+    1.Determinar el estado de aprobación
+    2.Calcular el promedio
+    3.Contar calificaciones mayores
+    4.Verificar y contar calificaciones específicas\n""")
 
     while not option.isnumeric():
         print ("Ingrese una Opcion valida")
@@ -74,7 +82,7 @@ while iniciar:
             listNote.insert(i,notas)
         especificValue = input("Ingrese un valor especifico: ")
         for i in range(0,int(cantNote)):
-            if int(listNote[i])>=int(especificValue):
+            if int(listNote[i])>int(especificValue):
                 cont1+=1
         print (f"Las notas son: {listNote}\n")
         print("Las notas mayores al valor especifico ingresado son: ",cont1)
