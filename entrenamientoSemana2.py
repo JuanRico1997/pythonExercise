@@ -26,9 +26,7 @@ iniciar = True
 
 while iniciar:
     listNote = []
-    acumulator = 0
-    acumulator2 = 0
-
+    
     print("-----MENÚ PRINCIPAL-----")
     option = input("""Ingrese una opcion:
     1.Determinar el estado de aprobación
@@ -59,47 +57,69 @@ while iniciar:
 
     elif int(option) == 2:
 
-        cantNote = input("Cuantas notas desea ingresar?\n")
-        while not cantNote.isnumeric():
+        quantityNote = input("Cuantas notas desea ingresar?\n")
+        while not quantityNote.isnumeric():
                 print("No se permite caracteres ni numeros decimales.")
-                cantNote = input("\nCuantas notas desea ingresar?\n")
-        for i in range(1,int(cantNote)+1):
-            notas = int (input(f"Ingrese sus nota {i}:"))
-            listNote.insert(i,notas)
+                quantityNote = input("\nCuantas notas desea ingresar?\n")
             
-        
-        print("El promedio de sus notas es: ",promedioNotas(listNote))
+        for i in range(1,int(quantityNote)+1):
+            while True:
+                try:
+                    notas = int(input(f"Ingrese sus nota {i}:"))
+                    while int(notas)<0 or int(notas)>100:
+                        print("Ingrese la nota en el rango estipulado")
+                        notas = (input(f"Ingrese sus nota {i}:"))
+                    listNote.insert(i,int(notas))
+                    break
+                except ValueError:
+                    print("Solo se permiten numeros enteros")
+        print(listNote)    
         print (f"Las notas son: {listNote}\n")
+        print("El promedio de sus notas es: ",promedioNotas(listNote))
+        
 
     elif int(option) == 3:
-        cont1=0
-        cantNote = input("Cuantas notas desea ingresar?\n")
-        while not cantNote.isnumeric():
+        accountant=0
+        quantityNote = input("Cuantas notas desea ingresar?\n")
+        while not quantityNote.isnumeric():
             print("No se permite caracteres ni numeros decimales.")
-            cantNote = input("\nCuantas notas desea ingresar?\n")
-        for i in range(1,int(cantNote)+1):
-            notas = int (input(f"Ingrese sus nota {i}:"))
-            listNote.insert(i,notas)
+            quantityNote = input("\nCuantas notas desea ingresar?\n")
+        for i in range(1,int(quantityNote)+1):
+            notes = input(f"Ingrese sus nota {i}:")
+            while not notes.isnumeric():
+                print("Solo se permiten numeros enteros")
+                notes = (input(f"Ingrese sus nota {i}:"))
+            listNote.insert(i,int(notes))
         especificValue = input("Ingrese un valor especifico: ")
-        for i in range(0,int(cantNote)):
+        while not especificValue.isnumeric():
+            print("No se permiten caracteres ni numeros decimales")
+            especificValue = input("Ingrese un valor especifico: ")
+        for i in range(0,int(quantityNote)):
             if int(listNote[i])>int(especificValue):
-                cont1+=1
+                accountant+=1
         print (f"Las notas son: {listNote}\n")
-        print("Las notas mayores al valor especifico ingresado son: ",cont1)
+        print("Las notas mayores al valor especifico ingresado son: ",accountant)
 
     elif int(option) == 4:
-        
-        cont3 = 0
-        note = input("Ingrese las notas separadas por coma: ").split(",")
-        notes = list(map(int,note))      
-        promedio = sum(notes)/len(notes)
-        print(f"Las notas son {notes} y el promedio es {promedio}")
-        rep = input("Ingrese un numero a verificar si se repite: ")
-        for i in range(0,len(notes)):
-            if int(rep) == notes[i]:
-                cont3+=1
-        print(f"El numero se repite {cont3} veces.")
-
+        while True:
+            try:
+                accountant = 0
+                note = input("Ingrese las notas separadas por coma: ").split(",")
+                notes = list(map(int,note))
+                if any(i < 0 or i>100 for i in notes):
+                    print("Las notas deben ser de 0 --- 100")
+                    continue
+                average = sum(notes)/len(notes)
+                print(f"Las notas son {notes} y el promedio es {average}")
+                repetitions = input("Ingrese un numero a verificar si se repite: ")
+                for i in range(0,len(notes)):
+                    if int(repetitions) == notes[i]:
+                        accountant+=1
+                print(f"El numero se repite {accountant} veces.")
+                break
+            except ValueError:
+                print("No se perimiten caracteres")
+                
     else:
         print("Ingrese una opción valida.")
         
