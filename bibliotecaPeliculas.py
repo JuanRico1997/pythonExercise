@@ -10,7 +10,7 @@ def nueva_pelicula():
     if id_pelicula in bibliotecaPeliculas:
         print("Este ID ya existe. Intente con otro.")
         return
-    
+    titulo = input("Ingrese el titulo de la pelicula")
     productor = input("Ingrese el autor del libro: \n")
     try:
         año = int(input("Ingrese el año de estreno de la pelicula: \n"))
