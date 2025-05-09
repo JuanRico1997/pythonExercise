@@ -21,7 +21,7 @@ def verifyInput(msg, type=str, extraValidation=None, extraErrorMsg="Error"):
 #Funcion para mostrar todo el valor del inventario
 def totalInvetory():
     
-    sumeValues = []
+    sumeValues = [] #Creacion de lista para guardar los valores y poder sacar la suma total
     for i in products:
         suma = 0 
         totalValue = i['valor']*i['existencia']
@@ -40,20 +40,21 @@ def enterProducts():
 Valor: {i['valor']} 
 Existencia: {i['existencia']}""")
             return
-
+    #Verificar variable que sea flotante y mayor que 0
     valueProduct = verifyInput(
         msg = "Ingrese el valor del producto: ", 
         type=float,
         extraValidation=lambda  x : x > -1,
         extraErrorMsg="El número es negativo. Ingresa un valor positivo."
     )
-
+    #Verifica variable que sea intero y mayor que 0
     existenceProducto = verifyInput(
         msg = "Ingrese la cantidad del producto: ",
         type = int,
         extraValidation = lambda value : value > -1,
         extraErrorMsg="El número es negativo. Ingresa un valor positivo."
     )
+    #Ingresa producto a la lista como diccionario
     newProducto = {'nombre':nameProduct,'valor':valueProduct,'existencia':existenceProducto}
     products.append(newProducto)
     print(f"El producto {newProducto['nombre']} fue agregado exitosamente")
@@ -61,6 +62,7 @@ Existencia: {i['existencia']}""")
 #Funcion para buscar un producto en el inventario
 def seeProduct():
     nameSearch = input("Ingrese el nombre del producto a buscar: ")
+    #Variable que sirve para guardar un valor y despues poder acceder a el
     found = None
     for i in products:
         if i['nombre'].lower() == nameSearch.lower():
@@ -89,10 +91,11 @@ def updatePrice():
 1.Actualizar nombre
 2.Actualizar precio
 3.Actualizar existencia\n"""))
-            
+        #Swich para elegir que se le desea modificar al producto    
         match update:
                 
             case 1:
+                
                 for i in products:
                     if i['nombre'].lower() == updateProduct.lower():
                         newName = input("Ingrese el nuevo nombre del producto: ")
