@@ -16,7 +16,7 @@ def verifyInput(mesagge, type=str, extraValidation=None, extraMessageError="Erro
         except ValueError:
             print(f"Entrada inválida. Ingresa un valor del tipo {type.__name__}.")
 
-#Displays all inventory at any time                
+#Displays all inventory at any time
 def seeInventory():
     print("----------Inventario----------")
     for product in products:
@@ -26,7 +26,7 @@ def seeInventory():
         print(f"Cantidad Disponible: {product['quantify']}")
         print("-"*30)
 
-#Add a single product, if it is already in inventory, it notifies you       
+#Add a single product, if it is already in inventory, it notifies you
 def addProduct():
     product = input("Ingrese el nombre del producto: ")
     for i in products:
@@ -49,7 +49,7 @@ def addProduct():
     products.append(newProduct)
     print("Producto agregado exitosamente al inventario.")
 
-#Search for a product and if it exists, show it, if not, notify that it does not exist  
+#Search for a product and if it exists, show it, if not, notify that it does not exist
 def findProduct():
     productToFind = input("Busque un producto por su nombre: ")
     for i in products:
@@ -63,7 +63,7 @@ def findProduct():
             return
     print("El producto NO está en el inventario.")
 
-#Modify the price of the desired product 
+#Modify the price of the desired product
 def newPrice():
     newPriceProduct = input("Ingrese el nombre del producto que desea actualizar el precio: ")
     for i in products:
@@ -81,26 +81,27 @@ def newPrice():
 def deletProduct():
     nameDeletProduct = input("Ingrese el nombre del producto que desea eliminar: ")
     found = None
-    exit = True
-    while exit == True:
-        for i in products:
+    
+    for i in products:
+            
             if i['nameProduct'].lower() == nameDeletProduct.lower().strip():
+                found = True
                 if i['quantify'] == 0:
+
                     print(f"El producto tiene {i['quantify']}. Desea eliminarlo?")
                     delet = input("1.SI\n2.NO\n")
                     match delet:
                         case '1':
                             products.remove(i)
                             print("Producto eliminado exitosamente !!")
-                            exit = False
                             break
                         case '2':
                             print("No se eliminó el producto")
-                            return
+                            break
                         case _:
                             print("Ingrese una opción valida")
                             break
-                            
+
                 else:
                     print(f"El producto todavía tiene {i['quantify']} unidades. Desea eliminarlo?")
                     delet = input("1.SI\n2.NO\n")
@@ -108,22 +109,21 @@ def deletProduct():
                         case '1':
                             products.remove(i)
                             print("Producto eliminado exitosamente !!")
-                            exit = False
-                            return
+                            break
                         case '2':
-                            return
+                            break
                         case _:
                             print("Ingrese una opción valida")
-                        
-            else:
-                print("El producto no está en el inventario.")
-                return
-    
+
+    if not found :
+        print("El producto no está en el inventario.")
         
+
+
 
 #Displays the products and their total (price*quantity)
 def totalInventary():
-    
+
     print("-------TOTAL INVENTARIO-------")
     for i in products:
         print("-"*30)
@@ -132,8 +132,8 @@ def totalInventary():
         print(f"Total acumulado: {total} ")
         print("-"*30)
         totalProducts.append(total)
-        
- 
+
+
 def firstMenu():
     NumberProductInto = verifyInput(
             mesagge="Ingrese la cantidad de productos a registrar: ",
@@ -147,12 +147,12 @@ def firstMenu():
             product = input(f"Ingrese el nombre del producto {j+1}: ")
             found = None
             for i in products:
-                
+
                 if i['nameProduct'].lower() == product.lower().strip():
                     print("El producto ya está en el inventario.")
                     found = i
                     continue
-                    
+
 
             if not found:
                 valueProduct = verifyInput(
@@ -173,7 +173,7 @@ def firstMenu():
                 j+=1
     else:
         print("Mínimo se permiten ingresar 5 productos.")
-           
+
 def secondMenu():
     while True:
         print("-------Inventario RIWI--------")
@@ -185,7 +185,7 @@ def secondMenu():
 5.Valor total del inventario.
 6.Mostrar el inventario.
 7.Salir
-                    
+
 Elija una opción: """)
 
         match optionMenu:
@@ -203,23 +203,25 @@ Elija una opción: """)
                 print(sum(totalProducts))
             case '6':
                 seeInventory()
+                for i in products:
+                    print(i)
             case '7':
                 break
             case _:
-                print("Ingrese una opción válida.")            
-            
-        
+                print("Ingrese una opción válida.")
+
+
 while True:
     totalProducts = []
-    
+
     option = input("----BIENVENIDO A NUESTRO SISTEMA----\nMarque una opción\n1.Ingresar productos (Mínimo 5 productos)\n2.Ver menú\n3.Salir\n")
     #Menú principal
     match option:
         case '1':
             firstMenu()
-        case '2':    
+        case '2':
             secondMenu()
         case '3':
             exit()
         case _:
-            print("Ingrese una opción válida.")        
+            print("Ingrese una opción válida.")
