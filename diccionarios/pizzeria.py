@@ -1,5 +1,6 @@
 products = [{'Nombre':'Pizza Hawaiana','Ingredientes':['Masa','Queso','Jamón','Piña'],'Precio':{'Pequeña':15000,'Mediana':30000,'Grande':60000}},
-            {'Nombre':'Pizza Paisa','Ingredientes':['Masa','Queso','Jamón','Tocineta'],'Precio':{'Pequeña':15000,'Mediana':30000,'Grande':60000}}]
+            {'Nombre':'Pizza Paisa','Ingredientes':['Masa','Queso','Jamón','Tocineta'],'Precio':{'Pequeña':15000,'Mediana':30000,'Grande':60000}},
+            {'Nombre':'a','Ingredientes':['Masa','Queso','Jamón','Tocineta'],'Precio':{'Pequeña':15000,'Mediana':30000,'Grande':60000}}]
 orders = []
 inventary = [{'Nombre':'Masa','Cantidad':50},{'Nombre':'Queso','Cantidad':50},{'Nombre':'Piña','Cantidad':50},{'Nombre':'Jamón','Cantidad':50},{'Nombre':'Tocineta','Cantidad':50},{'Nombre':'Salami','Cantidad':50},{'Nombre':'Peperoni','Cantidad':50}]
 
@@ -61,19 +62,24 @@ def removeProductInventary():
             found = i
             print("Está seguro que desea eliminar el producto?\n1.Si\n2.No")
             optionRemove = input("")
-            match optionRemove:
-                case '1':
-                    inventary.remove(i)
-                    print("Producto eliminado exitosamente")
-                case '2':
-                    break
-                case _:
-                    print("Ingrese una opción valida.")
-                    continue
+            while True:
+                match optionRemove:
+                    case '1':
+                        inventary.remove(i)
+                        print("Producto eliminado exitosamente!")
+                        break
+                    case '2':
+                        print("No se eliminó el producto!")
+                        break
+                    case _:
+                        print("Ingrese una opción valida.")
+                        print("Está seguro que desea eliminar el producto?\n1.Si\n2.No")
+                        optionRemove = input("")
+                        continue
+                        
     if not found:
         print("El producto no se encuentra en el inventario.")
             
-
 def menuInventary():
     while True:
         option = input("""----------MENÚ INVENTARIO------------
@@ -100,11 +106,7 @@ Ingrese una opción:\n
 
 
 
-
-
-
-
-
+#----------------Menú Carta-----------------------
 def seeProducts():
     print("-----------------------------MENÚ---------------------------")
     for i in products:
@@ -114,18 +116,14 @@ def seeProducts():
         print("Ingredientes: " + ' '.join(value))
         print("Pequeña: 15000 - Mediana: 30000 - Grande: 60000")
         print("--"*30)
-        
 
-
-        
-    
 def seeInventary():
     print("-----------INVENTARIO---------")
     for i in inventary:
         print("-"*30)
         print(f"Nombre: {i['Nombre']}")
-        print(f"Cantidad: {i['Cantidad']}")        
-            
+        print(f"Cantidad: {i['Cantidad']}")     
+
 def addProduct():
     ingredients = []
     ingredientProducto = []
@@ -157,26 +155,77 @@ def addProduct():
     products.append({'Nombre':nameProduct,'Ingredientes':ingredientProducto,'Precio':"Pequeña: 15000 , Mediana:30000 , Grande:60000"})
     print("Producto agregado al menú exitosamente!")
 
-       
-
+def modifyProduct():
+    productModify = input("Ingrese el nombre del producto a modificar: ")
+    for i in products:
+        if productModify.lower() == i['Nombre'].lower():
+            option = input("¿Qué desea modificar?\n1.Nombre.\n2.Ingredientes.\n3.Precio.\n")
+            match option:
+                case '1':
+                    for i in products:
+                        if productModify.lower() == i['Nombre'].lower():
+                            newName = input("Ingrese el nuevo nombre: ")
+                            i['Nombre'] = newName
+                            print("Nombre cambiado exitosamente")
+                case '2':
+                    optionEdit =input("1.Agregar ingrediente.\n2.Eliminar Ingrediente.\n")
+                    match optionEdit:
+                        case '1':
+                            for i in products:
+                                if productModify.lower() == i['Nombre'].lower():
+                                    values = i['Ingredientes']
+                                    print(f"Ingredientes actuales: "+' '.join(values))
+                                    print(f"Listado de ingredientes en la pizzeria: ")
+                                    listIngredient = []
+                                    for i in inventary:
+                                        listIngredient.append(i['Nombre'])
+                                    salir = len(listIngredient)+1
+                                    print(" ".join(f"{i+1}.{ing}" for i, ing in enumerate(listIngredient))+f" {salir}.Salir")
+                                    print("Elija los ingredientes que desea agregar al producto:")
+                                    while True:
+                                        addIngredient = int(input(""))
+                                        if addIngredient >= salir:
+                                            print("Productos agregados exitosamente!")
+                                            break
+                                        found = None
+                                        for i in values:
+                                            if i == listIngredient[addIngredient-1]:
+                                                print("El ingrediente ya está en el producto!")
+                                                continue                                       
+                                              
+                                            values.append(listIngredient[addIngredient-1])
+                                                
+                                        
+                                        
+                                                
+                                     
+                                     
+                            
+                        
+        
 def menu():
     while True:
         print("---------MENÚ PRODUCTOS--------")
         option = input("""
 1.Agregar producto al menú.
+2.Modificar producto.
 6.Ver menú.
 7.Salir.\n""")
         match option:
             case '1':
                 addProduct()
+            case '2':
+                modifyProduct()
             case '6':
                 seeProducts()
             case '7':
                 break
             case _:
                 print("Ingrese una opción valida.")
+
+
             
-       
+#----------------Menú Carta-----------------------       
 
 while True:
     
